@@ -147,17 +147,38 @@ class CrudApp(App):
             self.show_popup("Error de Validación", "Todos los campos son obligatorios para crear.")
             return
         
-        # SIEMPRE usa la imagen por defecto
-        crear(cid, name, phone, DEFAULT_IMAGE_PATH)
-        
-        self.clear_inputs()
-        self.read_contacts()
+        try:
+            # SIEMPRE usa la imagen por defecto
+            crear(cid, name, phone, DEFAULT_IMAGE_PATH)
+            self.clear_inputs()
+            self.read_contacts()
+            self.show_popup("Éxito", f"Contacto '{name}' creado correctamente.")
+        except Exception as e:
+            if "UNIQUE constraint failed" in str(e):
+                self.show_popup("Error", f"Ya existe un contacto con el ID '{cid}'.\nUsa un ID diferente.")
+            else:
+                self.show_popup("Error", f"No se pudo crear el contacto:\n{str(e)}")
 
     def read_contacts(self, instance=None):
         # Clear existing widgets
         self.contact_list_layout.clear_widgets()
         
         contacts = leer()
+        
+        # Si no hay contactos, mostrar mensaje
+        if not contacts:
+            empty_label = Label(
+                text="Aún no hay contactos.\n¡Añade alguno!",
+                size_hint_y=None,
+                height=100,
+                font_size='18sp',
+                halign='center',
+                valign='middle'
+            )
+            empty_label.bind(size=empty_label.setter('text_size'))
+            self.contact_list_layout.add_widget(empty_label)
+            return
+        
         for contact in contacts:
             contact_id, name, phone, image_path = contact
             
