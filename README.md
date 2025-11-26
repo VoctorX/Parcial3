@@ -24,7 +24,7 @@ Aplicación de gestión de contactos desarrollada con Kivy y SQLite.
 Abre tu terminal o línea de comandos y ejecuta:
 
 ```bash
-git clone https://github.com/tu-usuario/agenda-contactos.git
+git clone https://github.com/VoctorX/Parcial3.git
 cd agenda-contactos
 ```
 
@@ -190,6 +190,10 @@ Si quieres contribuir o modificar el proyecto:
 ## 📄 Licencia
 
 Este proyecto es de código abierto y está disponible bajo la licencia MIT.
+
+## Autor ✒️
+
+* **Victor Cordoba** - *Creador y desarrollador principal* - [VoctorX](https://github.com/VoctorX)
 
 ## 🤝 Contribuciones
 
